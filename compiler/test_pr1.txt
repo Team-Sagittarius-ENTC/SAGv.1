@@ -1,0 +1,5 @@
+0000100 000 00 00 00            // Machine instruction for LDNEXT
+0000 1001 1100 0100             // Value to load (2500)
+
+0000100 000 00 00 00            // Machine instruction for LDNEXT
+0000 1110 0001 0000             // Value to load (3600)
