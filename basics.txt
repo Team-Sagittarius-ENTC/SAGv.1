@@ -1,0 +1,55 @@
+CPU SPECIFICATIONS
+==================
+
+BIG ENDIAN
+
+
+
+
+ALU INSTRUCTIONS
+================
+
+    HEX     BIN     OPERATION
+    --------------------------
+    0x0     0000    A + B
+    0x1     0001    A - B
+    0x2     0010    A + B + 1
+    0x3     0011    A + 1
+
+    0x4     0100    A
+    0x5     0101    B
+    0x6     0110    0    
+
+
+MICRO INSRUCTION FORMAT
+=====================
+
+    ADDR        CTRL        ALU     EXT    C_BUS       MEM     A_BUS   B_BUS
+    8           3           4       2      12          3       4       4        40 bits
+
+
+ADDRESSING MODES
+================
+
+    HEX     BINARY      MODE
+    ------------------------
+    0x0     000         REGISTER DIRECT ADDRESSING
+
+
+
+ASSEMBLY INSRUCTION FORMAT
+==========================
+
+    OPCODE  ADD_MODE    RD  R1  R2
+    7       3           2   2   2
+
+    0000000 000         00  00  00
+
+
+
+ASSEMBLY INSTRUCTIONS
+=====================
+
+LDIM    x   RD      <followed by 16 bit value to load>
+
+    
