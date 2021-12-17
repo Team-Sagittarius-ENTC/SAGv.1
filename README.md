@@ -66,4 +66,42 @@ To restrict and save space, A, B bus output control signals should be encoded. P
 | 0xf | 1111 | H3| H3 | H3 General Purpose Register
 
 
+### 3.3. C bus Information
+In the below table we have provided the order of the registers in the C bus microinstruction format.
+|Bit order| Register |
+|--|--|
+| MSB(11) | MAR |
+|10|MDR|
+|9|PC|
+|8|SP|
+|7|LV|
+|6|TOS|
+|3|H0|
+|2|H1|
+|1|H2|
+|LSB(0)|H3|
+
+
+## 4. Addressing Modes in Assembly
+We have provided 3 bits space to represent addressing mode. It implies we can have 8 addressing modes. But so far, we have used only one addressing mode (Reigister Direct). Refer the table for more information.
+|Hex code| Bin Code  | Description
+|--|--|--|
+| 0x0 | 000 | Register Direct Addressing Mode
+
+## 5. Assembly Instruction Format
+The assembly instruction consists of 16 bits. 7 bits for OPCODE, 3 bits for ADDR mode, 6 bits for OPERANDS. More details will be added later.
+
+## 6. Table of assembly instructions
+|Hex Code| Instruction | Description |
+|--|--|--|
+| 0x00 | NOP | No Operation |
+|  | LDIM [reg] [imme] | Load Immidiate value to the register. The immediate value must be in the following address |
+|  | RDSENSOR | This command will update sensor address, read sensordata, calculate difference, save the difference to an array, save new value to LOCAL VARIABLE POOL |
+|  | ACCMEAN | This is a special instuction to accumulate values for the mean calculation |
+|  | ACCSTD | This is a special instuction to accumulate values for the std calculation |
+|  | INTDIV [reg] [imme] | Integer division register value by immediate value |
+|  | INTSQRT [reg1] [reg2] | Integer square root of regiter 2 saved to register 1 |
+|  | JIFCOMP [mem_offset] | This is a special instuction to check if we readed 8 sensors |
+|  | JUMP [mem_offset] | Unconditional jump |
+|  | JIFEQ [reg] [imme] [offset] | Jump if immediate value is equals to value in the register to given offset |
 
