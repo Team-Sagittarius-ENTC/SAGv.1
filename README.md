@@ -1,5 +1,5 @@
 
-# SAGv.1
+# SAGv.1 Processor
 SAGv.1 a application specific integrated circuit (ASIC) design process temperature sensor data of thousands of machines.
 
 ## 1. CPU Specifications
@@ -36,15 +36,34 @@ Since the proccesor is a CISC based architechure, microprogramming is essential.
 |--|--|--|--|--|--|--|--|
 | 8 bits | 3 bits | 4 bits | 2 bits | 12 bits | 3 bits | 4 bits | 4 bits |
 
-### 3.1 Descriptions of micro instruction units
+### 3.1. Descriptions of micro instruction units
 |Micro Instruction Unit| Description |
 |--|--|
 | ADDR | This has 8 bits of space. This unit represents the address of the next micro instruction. |
 | CTRL | 3 bits are allocated for JMPC (jump to program counter), JAMN (negetive flag check), JAMZ (zero flag check).|
 |ALU| 4 bits are allocated to represent the ALU instuction (Refer topic 2). |
 |EXT| Remain unused till now. (For future extensions). |
-|C bus| Reserved 12 bits to provide write control signals for registers. Many registers can be written at the same time. (Refer 3.4 for further details).  |
+|C bus| Reserved 12 bits to provide write control signals for registers. Many registers can be written at the same time. (Refer 3.3 for further details).  |
 |MEM| Reserved 3 bits for memory handling purposes. Write, Read, Fetch respectively. |
 |A Bus| Reserved 4 bits to select the register to put on A bus. Only one register can access the A bus at a time. (Refer 3.2 for further details) |
-|B Bus| Reserved 4 bits to select the register to put on B bus. Only one register can access the B bus at a time. (Refer 3.3 for further details) |
+|B Bus| Reserved 4 bits to select the register to put on B bus. Only one register can access the B bus at a time. (Refer 3.2 for further details) |
+
+### 3.2. A bus, B bus decoding Information
+To restrict and save space, A, B bus output control signals should be encoded. Please refer the below table to handle register outputs.
+|Hex code| Bin Code | A bus | B bus | Description|
+|--|--|--|--|--|
+| 0x0 | 0000 | NONE | NONE | Nothing outputs to the bus
+| 0x1 | 0001 | MAR | MAR | Memory Address Register
+| 0x2 | 0010 | MDR | MDR | Memory Data Register
+| 0x3 | 0011 | PC | PC | Program Counter
+| 0x4 | 0100 | MBR | MBR | Memory Buffer Register
+| 0x5 | 0101 | SP | SP | Stack Pointer
+| 0x6 | 0110 | LV| LV | Local Variable Pointer
+| 0x7 | 0111 | TOS| TOS | Top Of the Stack
+| 0xc | 1100 | H0| H0 | H0 General Purpose Register
+| 0xd | 1101 | H1| H1 | H1 General Purpose Register
+| 0xe | 1110 | H2| H2 | H2 General Purpose Register
+| 0xf | 1111 | H3| H3 | H3 General Purpose Register
+
+
 
