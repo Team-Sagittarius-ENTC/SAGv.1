@@ -24,36 +24,47 @@ JIFCOMP <offset if (***)>                       //if NMS:
 JUMP    <mem_addr of (*)>
 
 
-LDIM    H3      0x0000                          //H3 = 0                         //loop counter--------------------------(***)
-LDIM    H0      0x0000                          //H0 = 0                         // accumulator (mean) initialization
+LDIM    H3      0x0000                          //H3 = 0                                 //loop counter--------------------------(***)
+LDIM    H0      0x0000                          //H0 = 0                                 // accumulator (mean) initialization
 
-ACCMEAN                                         //H0 = H0 + MDR                  // reading and adding number----------(**)
-                                                //MAR = MAR + 1                  //incrementing the address
+ACCMEAN                                         //H0 = H0 + MDR                         // reading and adding number----------(**)
+                                                //MAR = MAR + 1                         //incrementing the address
                                                 //MEM_READ
-                                                //H3 = H3 +1                     // loop counter incrementing
+                                                //H3 = H3 +1                            // loop counter incrementing
 
 
 JIFEQ   H3      0x0008      <offset(****)>      //if H3 == 8:
 JUMP    <mem_offset to (**)>
 
-INTDIV  H0      0x0008                          //H0 = H0 / 8                //mean is saved at H0------------------------------(****)
+INTDIV  H0      0x0008                          //H0 = H0 / 8                           //mean is saved at H0------------------------------(****)
 
-LDIM    H2      0x0000                          //H2 = 0                     // sd accumilator initialization 
+LDIM    H2      0x0000                          //H2 = 0                                // sd accumilator initialization 
 
-ACCSTD                                          //H1 = MDR - H0              //(x-u) to the H1  -------------------($)
-                                                //H1 = H1 * H1               //squaring
-                                                //H2 = H2 + H1               //accumilating the squared
-                                                //H3 = H3 - 1                //decreneting the counter
-                                                //MAR = MAR - 1              //decrementing the memory address
+ACCSTD                                          //H1 = MDR - H0                         //(x-u) to the H1  -------------------($)
+                                                //H1 = H1 * H1                          //squaring
+                                                //H2 = H2 + H1                          //accumilating the squared
+                                                //H3 = H3 - 1                           //decreneting the counter
+                                                //MAR = MAR - 1                         //decrementing the memory address
                                                 //MEM_READ
 
 JIFEQ   H3      0x0000      <offset($$)>
 JUMP    <mem_offset to ($)>
 
-INTDIV  H2      0x0008                          //H2 = H2 / 8            // the variance----------------------------($$)
-INTSQRT H2      H2                              //H2 = SQRT(H2)          // sd is at H2
+INTDIV  H2      0x0008                          //H2 = H2 / 8                           // the variance----------------------------($$)
+
+INTSQRT H2      H2                              //H2 = SQRT(H2)                         // sd is at H2
+
+
+                                                H3 = 0                                  // Calculating the Square root
+                                                H2 = H2 - H3                            //-------------------($)
+                                                H3 = H3 + 1
+                                                H2 = H2 - H3
+                                                if H2 > 0; goto <$$$> <mem_offset to ($$$)>
 
 JUMP    <mem_addr of (*)>
+
+
+
 
 
 
