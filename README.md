@@ -13,7 +13,7 @@ SAGv.1 a application specific integrated circuit (ASIC) design process temperatu
  - Use 3 data busses
 
 ## 2. ALU Capabilities and Instructions
-The arithmatic logic unit of the CPU is carefully designed for specific mathematical operations needed for temperature process.
+The arithmatic logic unit of the CPU is carefully designed for specific mathematical operations needed for temperature process. And also there are two ALU flags to indicate ZERO and NEGETIVE numbers.
 | Hex code | Bin representation | Operation | Descreption |
 |--|--|--|--|
 | 0x0 | 0000 | A + B | Put the sum of A, B to C bus |
